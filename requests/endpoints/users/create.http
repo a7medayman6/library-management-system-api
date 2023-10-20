@@ -1,0 +1,62 @@
+# Happy Path
+POST http://localhost:3000/api/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ahmed",
+    "email": "a@gmail.com"
+}
+
+### 
+
+POST http://localhost:3000/api/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Mohamed",
+    "email": "m@gmail.com"
+}
+
+### 
+
+POST http://localhost:3000/api/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Mido",
+    "email": "mx@gmail.com"
+}
+
+###
+
+# Missing Username
+POST http://localhost:3000/api/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "email": "a@gmail.com"
+}
+
+###
+
+# Missing Email
+
+POST http://localhost:3000/api/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Mohamed"
+}
+
+### 
+
+# Invalid Email
+
+POST http://localhost:3000/api/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Mohamed",
+    "email": "a"
+}
+

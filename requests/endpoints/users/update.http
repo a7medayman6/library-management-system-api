@@ -1,0 +1,20 @@
+POST http://localhost:3000/api/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Huda",
+    "email": "h@gmail.com"
+}
+
+### 
+
+PATCH http://localhost:3000/api/v1/users/4 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Hoda"
+}
+
+### 
+
+GET http://localhost:3000/api/v1/users/4 HTTP/1.1

@@ -1,0 +1,17 @@
+POST http://localhost:3000/api/v1/books/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Utupia",
+    "author": "Ahmed Khaled",
+    "ISBN": "9780343213565",
+    "available_copies": 5
+}
+
+### Delete the recently created book (using it's id)
+
+DELETE http://localhost:3000/api/v1/books/3  HTTP/1.1
+
+### List all books verifying that the book was deleted
+
+GET http://localhost:3000/api/v1/books/ HTTP/1.1

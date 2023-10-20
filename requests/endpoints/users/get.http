@@ -1,0 +1,10 @@
+# Happy path: existing user
+GET http://localhost:3000/api/v1/users/1 HTTP/1.1
+
+### 
+# Happy path: existing user
+GET http://localhost:3000/api/v1/users/2 HTTP/1.1
+
+###
+# Non-existing user
+GET http://localhost:3000/api/v1/users/3024645 HTTP/1.1

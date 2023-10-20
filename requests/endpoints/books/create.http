@@ -1,0 +1,22 @@
+### Happy Path
+POST http://localhost:3000/api/v1/books/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "ISBN": "9780743273565",
+    "available_copies": 5
+}
+
+### Same ISBN
+
+POST http://localhost:3000/api/v1/books/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "X",
+    "author": "Author X",
+    "ISBN": "9780743273565",
+    "available_copies": 5
+}

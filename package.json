@@ -1,0 +1,25 @@
+{
+  "name": "library-mangement-system",
+  "version": "1.0.0",
+  "description": "simple library management system to manage books and",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "nodejs server.js"
+  },
+  "author": "Ahmed Ayman",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.6.2",
+    "sequelize": "^6.33.0",
+    "sequelize-cli": "^6.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  }
+}
