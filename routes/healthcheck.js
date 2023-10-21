@@ -1,7 +1,5 @@
 const router = require('express').Router();
 
-
-
 /**
  * @openapi
  * /health:

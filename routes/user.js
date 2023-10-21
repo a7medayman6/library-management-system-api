@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { registerUser, getAllUsers, updateUser, deleteUser, getUserById, getUserCheckouts } = require('../controllers/user');
+const { registerUser, getAllUsers, updateUser, deleteUser, getUserById, getUserCheckouts, getUserBooks, getUserOverdueBooks } = require('../controllers/user');
 
 /**
  * @openapi
@@ -210,5 +210,61 @@ router.get('/:id', getUserById);
  * 
  */
 router.get('/:id/checkouts', getUserCheckouts);
+
+
+/**
+ * @openapi
+ * /api/v1/users/{id}/overdue:
+ *  get:
+ *      summary: Get all overdue books for a user
+ *      description: Get all overdue books for a user
+ *      tags: [User]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: integer
+ *            required: true
+ *            description: User's id
+ *      responses:
+ *          200:
+ *              description: OK, returns a list of overdue books
+ *          404:
+ *              description: User not found
+ *          400:
+ *              description: Bad request
+ *          500:
+ *              description: Internal Server Error
+ * 
+ */
+router.get('/:id/overdue', getUserOverdueBooks);
+
+// generate openai docs for the route below for use with swagger jsdoc
+/**
+ * @openapi
+ * /api/v1/users/{id}/books:
+ *  get:
+ *      summary: Get all books that a user has borrowed and didn't return yet
+ *      description: Get all books that a user didn't return yet
+ *      tags: [User]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: integer
+ *            required: true
+ *            description: User's id
+ *      responses:
+ *          200:
+ *              description: OK, returns a list of books
+ *          404:
+ *              description: User not found
+ *          400:
+ *              description: Bad request
+ *          500:
+ *              description: Internal Server Error
+ * 
+ */
+router.get('/:id/books', getUserBooks);
 
 module.exports = router;
