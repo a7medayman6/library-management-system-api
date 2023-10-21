@@ -401,7 +401,7 @@ const getUserBooks = async (req, res) =>
     };
 }
 
-// document this function in Swagger format 
+
 /**
  * Retrieves the books a user borrowed and didn't return yet by ID.
  * @async
