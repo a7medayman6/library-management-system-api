@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const Logger = require('./utils/logger');
 const path = require('path');
+const swaggerDocs = require('./utils/swagger');
 
 const filename = path.basename(__filename);
 
@@ -28,7 +29,8 @@ app.use(cors(cors_options));
 
 
 // Routes
-app.get('/health', (req, res) => { res.json({health: 'OK'}); });
+app.use('/health', require('./routes/healthcheck'));
+app.use(`${api_base_url}/health`, require('./routes/healthcheck'));
 app.use(`${api_base_url}/users`, require('./routes/user'));
 app.use(`${api_base_url}/books`, require('./routes/book'));
 app.use(`${api_base_url}/checkout`, require('./routes/checkout'));
@@ -38,5 +40,8 @@ app.use(`${api_base_url}/return`, require('./routes/return'));
 app.listen(PORT, () => 
 {
   Logger.log(filename, `Server is listening on port ${PORT} ...`);
+
+  swaggerDocs(app, api_base_url, PORT);
+
 });
 

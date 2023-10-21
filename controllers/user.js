@@ -8,6 +8,8 @@ const User = db.users;
 const Book = db.books;
 const Checkout = db.checkouts;
 
+
+
 const registerUser = async (req, res) =>
 {
     let user_data = {

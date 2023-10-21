@@ -8,13 +8,19 @@ const User = db.users;
 const Book = db.books;
 const Checkout = db.checkouts;
 
+
 /**
- * Creates a new book with the given title, author and ISBN.
+ * Creates a new book.
  * @async
- * @function
+ * @function createBook
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
- * @returns {Promise<void>} - A Promise that resolves when the book is created successfully.
+ * @param {string} req.body.title - The title of the book.
+ * @param {string} req.body.author - The author of the book.
+ * @param {string} req.body.ISBN - The ISBN of the book.
+ * @param {number} req.body.available_copies - The number of available copies of the book.
+ * @returns {Object} The response object with a message and data property.
+ * @throws {Object} The response object with a message property if an error occurs.
  */
 const createBook = async (req, res) =>
 {
@@ -92,13 +98,15 @@ const getAllBooks = async (req, res) =>
 }   
 
 
+
 /**
  * Retrieves a book by its ID.
  * @async
  * @function
- * @param {Object} req - The request object.
- * @param {Object} res - The response object.
- * @returns {Object} The response object with the retrieved book data or an error message.
+ * @param {Object} req - The HTTP request object.
+ * @param {Object} res - The HTTP response object.
+ * @param {number} req.params.id - The ID of the book to retrieve.
+ * @returns {Object} - The HTTP response object with a JSON payload containing the book data or an error message.
  */
 const getBookById = async (req, res) =>
 {
@@ -148,6 +156,10 @@ const getBookById = async (req, res) =>
  * @function updateBook
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
+ * @param {string} [req.body.title] - The title of the book.
+ * @param {string} [req.body.author] - The author of the book.
+ * @param {string} [req.body.ISBN] - The ISBN of the book.
+ * @param {number} [req.body.available_copies] - The number of available copies of the book.
  * @returns {Promise<void>} - A Promise that resolves when the book is updated.
  */
 const updateBook = async (req, res) =>
@@ -216,13 +228,15 @@ const updateBook = async (req, res) =>
     }
 }
 
+
 /**
- * Deletes a book with the specified ID from the database.
+ * Deletes a book with the specified ID.
  * @async
  * @function deleteBook
- * @param {Object} req - The HTTP request object.
- * @param {Object} res - The HTTP response object.
- * @returns {Promise<void>} - A Promise that resolves when the book is deleted or rejects with an error.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {number} req.params.id - The ID of the book to delete.
+ * @returns {Object} The response object.
  */
 const deleteBook = async (req, res) =>
 {
@@ -301,6 +315,7 @@ const deleteAllBooks = async (req, res) =>
  * @function
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
+ * @param {number} req.params.id - The ID of the book to retrieve checkouts for.
  * @returns {Promise<void>} - A Promise that resolves when the checkouts are retrieved successfully.
  */
 const getBookCheckouts = async (req, res) =>
@@ -345,8 +360,16 @@ const getBookCheckouts = async (req, res) =>
     }
 }
 
-
-// search for books by title, author or ISBN
+/**
+ * Searches for books by title, author or ISBN using query parameters.
+ * At least one query parameter is required.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {string} [req.query.title] - The title of the book to search for.
+ * @param {string} [req.query.author] - The author of the book to search for.
+ * @param {string} [req.query.ISBN] - The ISBN of the book to search for.
+ * @returns {Promise<void>} - A Promise that resolves with the search results.
+ */
 const searchBooks = async (req, res) =>
 {
     let title_query = req.query.title;
@@ -388,40 +411,3 @@ const searchBooks = async (req, res) =>
 }
 
 module.exports = { createBook, getAllBooks, getBookById, updateBook, deleteBook, deleteAllBooks, getBookCheckouts, searchBooks };
-
-/*
-Book Schema:
-
-        id: 
-        {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        title: 
-        {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        author: 
-        {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        ISBN: 
-        {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            // number of digits in ISBN is 10 in ISBN-10 (older books) and 13 in ISBN-13
-            validate: 
-            {
-                len: [10, 13]
-            }
-        },
-        registeration_date: 
-        {
-            type: DataTypes.DATEONLY,
-            defaultValue: Sequelize.NOW
-        },
-*/
