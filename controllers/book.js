@@ -49,6 +49,14 @@ const createBook = async (req, res) =>
         return;
     }
 
+    if(input_data.available_copies && input_data.available_copies < 0)
+    {
+        res.status(400).json({
+            message: "Book available copies must be a positive number or 0."
+        });
+        return;
+    }
+    
     // create a new book
     try
     {
@@ -202,6 +210,14 @@ const updateBook = async (req, res) =>
             });
             return;
         }
+    }
+
+    if(input_data.available_copies && input_data.available_copies < 0)
+    {
+        res.status(400).json({
+            message: "Book available copies must be a positive number or 0."
+        });
+        return;
     }
 
     const book_updates = {}

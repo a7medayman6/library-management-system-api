@@ -30,7 +30,7 @@ const router = require('express').Router();
  *                              example: 9780061122415
  *                          available_copies:
  *                              type: integer
- *                              description: Book's available copies
+ *                              description: Book's available copies (must be 0 or greater)
  *                              example: 1
  *      responses:
  *          201:
@@ -90,8 +90,6 @@ router.get('/', getAllBooks);
  *              description: Internal Server Error
  */
 router.get('/search', searchBooks);
-
-
 
 /**
  * @openapi
@@ -154,7 +152,7 @@ router.get('/:id', getBookById);
  *                              example: 9780061122415
  *                          available_copies:
  *                              type: integer
- *                              description: Book's available copies
+ *                              description: Book's available copies (must be 0 or greater)
  *                              example: 5
  *      responses:
  *          200:
@@ -208,7 +206,7 @@ router.delete('/:id', deleteBook);
  */
 router.delete('/', deleteAllBooks);
 
-// generate openapi docs for get book checkouts for use with swagger jsdoc, tag it with Book.
+
 /**
  * @openapi
  * /api/v1/books/{id}/checkouts:
