@@ -199,3 +199,8 @@ npm run seed
 npm run test
 ```
 
+## Database Schema
+
+### ER Diagram
+
+![ER Diagram](./imgs/library-management-system-db.erdiagram.png)
