@@ -38,5 +38,12 @@ module.exports = (sequelize, DataTypes) =>
         updatedAt: true,
     });
 
-    return User;
+    // User.Checkout = User.hasMany(sequelize.models.Checkout, 
+    // {
+    //     as: 'Checkout',
+    //     foreignKey: 'user_id',
+    //     onDelete: 'CASCADE',
+    // });
+
+    return User; 
 }

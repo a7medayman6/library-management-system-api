@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+
 const users = [
     {
       name: 'John Doe',
@@ -25,12 +26,17 @@ const users = [
 
 
 
-const seedUsers = async () => {
+const seedUsers = async (url, adminCredentials) => {
     for (let i = 0; i < users.length; i++) 
     {
         const user = users[i];
-        await axios.post('http://localhost:3000/api/v1/users', user);
+        await axios.post(url, user, {
+          auth: {
+              username: adminCredentials.username,
+              password: adminCredentials.password
+          }
+      });
     }
 }
 
-module.exports = { seedUsers };
+module.exports = { seedUsers }; 

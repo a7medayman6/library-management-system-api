@@ -12,6 +12,7 @@ const sequelize = new Sequelize(
     db_config.PASSWORD,
     {
         host: db_config.HOST,
+        port: db_config.PORT,
         dialect: db_config.dialect,
         operatorsAliases: false,
         pool: 
@@ -44,7 +45,7 @@ db.sequelize = sequelize;
 db.books = require("./book.model.js")(sequelize, DataTypes);
 db.users = require("./user.model.js")(sequelize, DataTypes);
 db.checkouts = require("./checkout.model.js")(sequelize, DataTypes);
-
+ 
 db.sequelize.sync({ force: false })
 .then(() =>
 {

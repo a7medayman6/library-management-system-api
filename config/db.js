@@ -5,7 +5,8 @@ module.exports =
     PASSWORD: process.env.DB_PASSWORD || 'root',
     DB: process.env.DB_NAME || 'library-management-system-db',
     dialect: process.env.DB_DIALECT || 'mysql',
- 
+    // port
+    PORT: process.env.DB_PORT || 3306,
     pool: {
         max: 5,
         min: 0,

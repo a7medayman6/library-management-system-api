@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) =>
         },
         user_id: 
         {
-            // reference to User.id (user_id)
             type: DataTypes.INTEGER,
             allowNull: false,
             references: 
@@ -27,7 +26,6 @@ module.exports = (sequelize, DataTypes) =>
         },
         book_id: 
         {
-            // reference to Book.id (book_id)
             type: DataTypes.INTEGER,
             allowNull: false,
             references: 
@@ -71,5 +69,8 @@ module.exports = (sequelize, DataTypes) =>
 
         updatedAt: true,
     });
+
+    Checkout.User = Checkout.belongsTo(sequelize.models.User, { as: 'User', foreignKey: 'user_id' });
+    Checkout.Book = Checkout.belongsTo(sequelize.models.Book, { as: 'Book', foreignKey: 'book_id' });
     return Checkout;
 }

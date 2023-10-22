@@ -8,7 +8,7 @@ const User = db.users;
 const Book = db.books;
 const Checkout = db.checkouts;
 
-// Checkout a new Book
+
 const checkoutBook = async (req, res) =>
 {
     let user_id = req.body.user_id;
@@ -91,7 +91,20 @@ const getAllCheckouts = async (req, res) =>
 {
     try
     {
-        let result = await Checkout.findAll();
+        let result = await Checkout.findAll({
+            include: [
+                {
+                    model: User,
+                    as: 'User',
+                    attributes: ['id', 'name', 'email']
+                },
+                {
+                    model: Book,
+                    as: 'Book',
+                    attributes: ['id', 'title', 'author', 'ISBN']
+                }
+            ]
+        });
         res.status(200).json(
             {
                 message: "Checkouts retrieved successfully.",
@@ -123,7 +136,20 @@ const getCheckoutById = async (req, res) =>
 
     try
     {
-        let result = await Checkout.findOne({ where: { id: checkout_id } });
+        let result = await Checkout.findOne({ 
+            where: { id: checkout_id },
+            include: [
+                {
+                    model: User,
+                    as: 'User',
+                    attributes: ['id', 'name', 'email']
+                },
+                {
+                    model: Book,
+                    as: 'Book',
+                    attributes: ['id', 'title', 'author', 'ISBN']
+                }
+            ] });
         if(!result)
         {
             res.status(404).json({
@@ -152,7 +178,25 @@ const getOverdueCheckouts = async (req, res) =>
 {
     try
     {
-        let result = await Checkout.findAll({ where: { return_date: { [db.Sequelize.Op.lt]: new Date() }, returned: false } });
+        let result = await Checkout.findAll({ 
+            where: 
+            { 
+                return_date: { [db.Sequelize.Op.lt]: new Date() }, 
+                returned: false 
+            },
+            include: [
+                {
+                    model: User,
+                    as: 'User',
+                    attributes: ['id', 'name', 'email']
+                },
+                {
+                    model: Book,
+                    as: 'Book',
+                    attributes: ['id', 'title', 'author', 'ISBN']
+                }
+            ]
+        });
         res.status(200).json(
             {
                 message: "Overdue Checkouts retrieved successfully.",
@@ -171,60 +215,3 @@ const getOverdueCheckouts = async (req, res) =>
 
 
 module.exports = { checkoutBook, getAllCheckouts, getCheckoutById, getOverdueCheckouts };
-
-/*
-Checkout Schema
-        id: 
-        {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        user_id: 
-        {
-            // reference to User.id (user_id)
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: 
-            {
-                model: 'Users',
-                key: 'id',
-                onDelete: 'CASCADE'
-            }
-        },
-        book_id: 
-        {
-            // reference to Book.id (book_id)
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: 
-            {
-                model: 'Books',
-                key: 'id',
-                onDelete: 'CASCADE'
-
-            }
-        },
-        checkout_date: 
-        {
-            type: DataTypes.DATEONLY,
-            defaultValue: Sequelize.NOW
-        },
-        return_date: 
-        {
-            type: DataTypes.DATEONLY,
-            // default is 7 days from checkout date
-            defaultValue: null
-        },
-        returned_date: 
-        {
-            type: DataTypes.DATEONLY,
-            defaultValue: null
-        },
-        returned:
-        {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
-        },
-
-*/

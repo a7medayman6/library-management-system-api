@@ -91,7 +91,7 @@ const getAllBooks = async (req, res) =>
     {
         let result = await Book.findAll();
         res.status(200).json({
-            message: "Users retrieved successfully.",
+            message: "Books retrieved successfully.",
             data: result
         });
     }

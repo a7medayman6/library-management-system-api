@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { basicAuth } = require('../middleware/auth');
 const { registerUser, getAllUsers, updateUser, deleteUser, getUserById, getUserCheckouts, getUserBooks, getUserOverdueBooks } = require('../controllers/user');
 
 /**

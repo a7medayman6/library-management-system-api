@@ -57,12 +57,17 @@ const books = [
     },
 ]
 
-const seedBooks = async () => {
+const seedBooks = async (url, adminCredentials) => {
     for (let i = 0; i < books.length; i++) 
     {
         const book = books[i];
-        await axios.post('http://localhost:3000/api/v1/books', book);
-    }
+        await axios.post(url, book, {
+            auth: {
+              username: adminCredentials.username,
+              password: adminCredentials.password
+            }
+        });
+    } 
 }
 
 module.exports = { seedBooks };

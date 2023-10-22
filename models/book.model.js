@@ -66,7 +66,14 @@ module.exports = (sequelize, DataTypes) =>
         ] 
     });
 
+    // Book.Checkout = Book.hasMany(sequelize.models.Checkout,
+    // {
+    //     as: 'Checkout',
+    //     foreignKey: 'book_id',
+    //     onDelete: 'CASCADE',
+    // });
 
+    
 
     return Book;
 }

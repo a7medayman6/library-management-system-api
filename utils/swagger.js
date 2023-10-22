@@ -31,17 +31,16 @@ const swaggerOptions =
         {
             securitySchemes: 
             {
-                bearerAuth: 
+                basicAuth: 
                 {
                     type: 'http',
-                    scheme: 'bearer',
-                    bearerFormat: 'JWT'
-                }
+                    scheme: 'basic'
+                },
             }
         },
         security: [
             {
-                bearerAuth: []
+                basicAuth: []
             },],
 
     },

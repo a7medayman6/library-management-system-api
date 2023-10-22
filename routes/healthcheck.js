@@ -13,7 +13,7 @@ const router = require('express').Router();
  */
 router.get('/', (req, res) => 
 {
-    res.json({health: 'OK'});
+    res.json({ health: 'OK' });
 });
 
 module.exports = router;

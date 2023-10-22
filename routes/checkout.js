@@ -50,7 +50,6 @@ router.post('/', checkoutBook);
  */
 router.get('/', getAllCheckouts);
 
-
 /**
  * @openapi
  * /api/v1/checkout/overdue:

@@ -226,19 +226,29 @@ const deleteUser = async (req, res) =>
 {
     let user_id = req.params.id;
 
-    // vaildate the user id exists
-    let user = await User.findByPk(user_id);
-    if (!user)
+    // check if user id is a number
+    if(!user_id || isNaN(user_id))
     {
-        res.status(404).json({
-            message: `User with id=${user_id} not found.`
+        res.status(400).send({
+            message: "User ID is required and must be a number."
         });
         return;
     }
-
+    
     // delete the user
     try
     {
+        
+            // vaildate the user id exists
+            let user = await User.findByPk(user_id);
+         
+            if (!user)
+            {
+                res.status(404).json({
+                    message: `User with id=${user_id} not found.`
+                });
+                return;
+            }
         let result = await User.destroy({ where: { id: user_id } });
         res.status(200).json(
             {
@@ -271,6 +281,15 @@ const deleteUser = async (req, res) =>
 const getUserById = async (req, res) =>
 {
     let user_id = req.params.id;
+
+    // check if user id is a number
+    if(!user_id || isNaN(user_id))
+    {
+        res.status(400).send({
+            message: "User ID is required and must be a number."
+        });
+        return;
+    }
 
     // vaildate the user id exists
     try
@@ -319,6 +338,15 @@ const getUserById = async (req, res) =>
 const getUserCheckouts = async (req, res) =>
 {
     let user_id = req.params.id;
+
+    // check if user id is a number
+    if(!user_id || isNaN(user_id))
+    {
+        res.status(400).send({
+            message: "User ID is required and must be a number."
+        });
+        return;
+    }
 
     // vaildate the user id exists
     try
@@ -369,6 +397,14 @@ const getUserBooks = async (req, res) =>
 {
     let user_id = req.params.id;
 
+    // check if user id is a number
+    if(!user_id || isNaN(user_id))
+    {
+        res.status(400).send({
+            message: "User ID is required and must be a number."
+        });
+        return;
+    }
     // vaildate the user id exists
     try
     {
@@ -417,6 +453,14 @@ const getUserOverdueBooks = async (req, res) =>
 {
     let user_id = req.params.id;
 
+    // check if user id is a number
+    if(!user_id || isNaN(user_id))
+    {
+        res.status(400).send({
+            message: "User ID is required and must be a number."
+        });
+        return;
+    }
     // vaildate the user id exists
     try
     {
